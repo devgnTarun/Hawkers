@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+@import "_similar";
+@import 'header';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.home_page {
+  @include mainWindow();
+  flex-direction : column;
+  overflow: hidden;
+}
+.bg_img {
+  width: 100%;
+  min-height: 45vh;
+  background-image:url('../Images//main.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.main_content {
+  width: 400px;
+  padding: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  @include blurNav();
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 20px;
+  h1 {
+    font-size: 20px;
+    margin: 15px auto;
+    color: black;
+  }
+  p {
+    font-size: 8px;
+    color: rgb(35, 34, 34);
+  }
+  button {
+    background-color: $yellow;
+    color: white;
+    width: 100%;
+    padding: 6px;
+    font-size: 12px;
+    margin-top: 20px ;
+  }
+}
+
+.home_cards {
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .cards {
+    text-align: center;
+    i {
+      font-size: 10px;
+      color: $yellow;
+    }
+    h3 {
+      font-size: 10px;
+      margin: 5px auto;
+      color: rgb(40, 39, 39);
+    }
+
+  }
+}
+
+@media (max-width : 500px) {
+  .main_content {
+    width: 90%;
+    h1 {
+      font-size: 15px;
+    }
+    p {
+      font-size: 7px;
+    }
+    button {
+      padding: 6px;
+      font-size: 9px;
+      margin-top: 20px ;
+    }
+  }
+  .home_cards {
+    margin-top: 100px;
+    .cards {
+      i {
+        font-size: 8px;
+      }
+      h3 {
+        font-size: 8px;
+      }
+    }
+  }
+}
