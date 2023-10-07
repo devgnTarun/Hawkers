@@ -1,0 +1,9 @@
+.login_page {
+ @include mainWindow();
+ flex-direction: column
+}
+ .login_container {
+ @include mainWindow();
+ width: 90%;
+ margin: 10px auto;
+}

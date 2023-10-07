@@ -1,6 +1,7 @@
-const mongoose = reuiqre('mongoose')
+const mongoose = require('mongoose')
 const validator = require('validator')
-const adharValidation = require('aadhaar-validator')
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const vendorSchema = new mongoose.Schema({
   vendorName: {
@@ -9,22 +10,22 @@ const vendorSchema = new mongoose.Schema({
     minLength: [3, "Name must be at least 3 characters long"],
     maxLength: [30, "Name must be at most 30 characters long"],
   },
-  vendorEmail: {
+  email: {
     type: String,
     required: true,
     unique: [true, "Email already exists"],
     validate: [validator.isEmail, "Please provide a valid email"],
   },
-  vendorAvatar: {
-    public_id: {
-      type: String,
-      required: true,
-    },
-    url: {
-      required: true,
-      type: String,
-    },
-  },
+  // vendorAvatar: {
+  //   public_id: {
+  //     type: String,
+  //     required: true,
+  //   },
+  //   url: {
+  //     required: true,
+  //     type: String,
+  //   },
+  // },
   vendorPassword: {
     type: String,
     required: true,
@@ -43,10 +44,6 @@ const vendorSchema = new mongoose.Schema({
     required: true,
     minLength: [12, "Aadhar number must be at least 12 characters long"],
     maxLength: [12, "Aadhar number must be at most 12 characters long"],
-    validate: [
-      adharValidation.isValidVID,
-      "Please provide a valid Aadhar number",
-    ],
   },
   vendorShop: {
     type: mongoose.Schema.Types.ObjectId,
@@ -67,7 +64,6 @@ const vendorSchema = new mongoose.Schema({
       required: true,
     },
   },
-  timestamps: true,
 });
 
 vendorSchema.pre("save", async function (next) {
