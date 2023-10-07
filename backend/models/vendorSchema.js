@@ -48,10 +48,6 @@ const vendorSchema = new mongoose.Schema({
       "Please provide a valid Aadhar number",
     ],
   },
-  vendorLocation: {
-    type: String,
-    required: true,
-  },
   vendorShop: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "VendorShop",
