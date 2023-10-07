@@ -9,6 +9,5 @@ const sendEmail = require("../utils/sendEmail");
 //Login User
 
 exports.registerUser = async (req, res) => {
-
  
  }

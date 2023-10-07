@@ -9,6 +9,10 @@ app.use(fileUpload());
 app.use(express.json());
 app.use(cors());
 
+const user = require("./routes/userRoute");
+
+app.use('/api' , user)
+
 
 
 module.exports = app;

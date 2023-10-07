@@ -2,9 +2,8 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Enter Your name"],
@@ -23,8 +22,12 @@ const userSchema = mongoose.Schema({
     minLength: [8, "Minimum lenght of password should be 8 characters"],
     select: false,
   },
- timestamps: true
+  verified: {
+    type: Boolean,
+    default: false,
+  },
 });
+
 //pre save function create krna jisnal ! Password te hash lgg jayegi, and (if) is used agr password modiefied nhi hai then hash lgani....
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
@@ -36,7 +39,7 @@ userSchema.pre("save", async function (next) {
 //JWT_TOKEN
 userSchema.methods.getJWTToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE,
+    expiresIn: process.env.JWT_EXPIRE || "15d",
   });
 };
 

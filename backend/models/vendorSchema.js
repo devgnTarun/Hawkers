@@ -15,6 +15,16 @@ const vendorSchema = new mongoose.Schema({
     unique: [true, "Email already exists"],
     validate: [validator.isEmail, "Please provide a valid email"],
   },
+  vendorAvatar: {
+    public_id: {
+      type: String,
+      required: true,
+    },
+    url: {
+      required: true,
+      type: String,
+    },
+  },
   vendorPassword: {
     type: String,
     required: true,
@@ -45,6 +55,21 @@ const vendorSchema = new mongoose.Schema({
   vendorShop: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "VendorShop",
+  },
+  verified: {
+    type: Boolean,
+    default: false,
+  },
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
   },
   timestamps: true,
 });

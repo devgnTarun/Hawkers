@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
 const Token = require("../models/tokenSchema");
 const sendEmail = require("../utils/sendEmail");
+const crypto = require("crypto");
 
 //Login User
 exports.loginUser = async (req, res) => {
@@ -93,7 +94,7 @@ exports.registerUser = async (req, res) => {
       .status(200)
       .json({
         success: true,
-        message: `Email verification has sent on your email!! `,
+        message: `Email verification has been  sent on your email!! `,
       });
   } catch (error) {
     res.status(500).json({ message: error.message });
