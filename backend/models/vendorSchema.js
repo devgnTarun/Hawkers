@@ -20,6 +20,7 @@ const vendorSchema = new mongoose.Schema({
     required: true,
     minLength: [8, "Password must be at least 8 characters long"],
     maxLength: [30, "Password must be at most 30 characters long"],
+    select: false,
   },
   vendorPhone: {
     type: Number,
@@ -36,16 +37,16 @@ const vendorSchema = new mongoose.Schema({
       adharValidation.isValidVID,
       "Please provide a valid Aadhar number",
     ],
- },
- vendorLocation: {
-  type: String,
-  required: true,
- },
- vendorShop: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: "VendorShop",
- },
- 
+  },
+  vendorLocation: {
+    type: String,
+    required: true,
+  },
+  vendorShop: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "VendorShop",
+  },
+  timestamps: true,
 });
 
 vendorSchema.pre("save", async function (next) {

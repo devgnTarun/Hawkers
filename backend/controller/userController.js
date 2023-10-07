@@ -5,14 +5,14 @@ const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
 const Token = require("../models/tokenSchema");
 const sendEmail = require("../utils/sendEmail");
-const crypto = require("crypto");
 
 //Login User
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email }).select("+password");
+   const user = await User.findOne({ email }).select("+password");
+   
     if (!user) {
       return res.status(404).json({ message: "User not found on this email" });
     }
@@ -59,11 +59,7 @@ exports.loginUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "Affilate User",
-      width: 150,
-      crop: "scale",
-    });
+ 
     const preUser = await User.findOne({ email });
 
     if (preUser) {
@@ -75,17 +71,14 @@ exports.registerUser = async (req, res) => {
     const user = await User.create({
       name,
       email,
-      password,
-      avatar: {
-        public_id: myCloud.public_id,
-        url: myCloud.secure_url,
-      },
+      password
     });
 
     const token = await Token.create({
       userId: user._id,
       token: crypto.randomBytes(32).toString("hex"),
     });
+   
     const url = `${req.protocol}://${req.get("host")}/users/${
       user._id
     }/verify/${token.token}`;

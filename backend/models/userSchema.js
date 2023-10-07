@@ -23,16 +23,6 @@ const userSchema = mongoose.Schema({
     minLength: [8, "Minimum lenght of password should be 8 characters"],
     select: false,
   },
-  avatar: {
-    public_id: {
-      type: String,
-      required: true,
-    },
-    url: {
-      required: true,
-      type: String,
-    },
-  },
  timestamps: true
 });
 //pre save function create krna jisnal ! Password te hash lgg jayegi, and (if) is used agr password modiefied nhi hai then hash lgani....
