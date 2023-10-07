@@ -6,6 +6,7 @@ const cloudinary = require("cloudinary");
 const Token = require("../models/tokenSchema");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const Vendor = require("../models/vendorSchema");
 
 //Login User
 exports.loginUser = async (req, res) => {
@@ -62,8 +63,9 @@ exports.registerUser = async (req, res) => {
     const { name, email, password } = req.body;
  
     const preUser = await User.findOne({ email });
+    const preVendor = await Vendor.findOne({email})
 
-    if (preUser) {
+    if (preUser || preVendor) {
       return res
         .status(401)
         .json({ message: "User already Exists on this email" });
@@ -94,7 +96,7 @@ exports.registerUser = async (req, res) => {
       .status(200)
       .json({
         success: true,
-        message: `Email verification has been  sent on your email!! `,
+        message: `Email verification has been sent on your email!! `,
       });
   } catch (error) {
     res.status(500).json({ message: error.message });
