@@ -3,19 +3,31 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
-const passport = require('passport')
-const pasportSetup = require('./middlewares/passport.js')
+const session = require('express-session');
+const passport = require('./middlewares/passport');
 
+
+
+app.use(session({
+    secret: 'mainHunNaBhai',
+    resave: true,
+    saveUninitialized: true,
+  }));
+
+// Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(fileUpload());
 app.use(express.json());
 app.use(cors("http://localhost:5000/"));
-app.use(passport.initialize())
-app.use(passport.session())
+
 
 const user = require("./routes/userRoute");
-
+const auth = require("./routes/googleRoutes")
 app.use('/api' , user)
+app.use('/auth' , auth)
+
 
 
 

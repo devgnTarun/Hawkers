@@ -26,6 +26,7 @@ export const userLogin = ({email, password}) =>  async (dispatch) => {
     }
 }
 
+
 // Register user 
 
 export const userRegister = ({name, email , password}) =>  async (dispatch) => {
@@ -49,6 +50,8 @@ export const userRegister = ({name, email , password}) =>  async (dispatch) => {
         })
     }
 }
+
+
 
 //Clearing all errors
 export const clearError = () => async (dispatch)=>{

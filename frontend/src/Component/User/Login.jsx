@@ -61,7 +61,7 @@ const Login = () => {
 
         {isVendor ? <>
           {/* vendor login  */}
-          {/* <VendorLogin/> */}
+          <VendorLogin/>
         </>
           :
           <>
