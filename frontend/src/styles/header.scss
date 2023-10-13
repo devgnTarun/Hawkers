@@ -3,7 +3,12 @@
     height: 60px;
     display: flex;
     align-items: center;
+    position: fixed;
+    top: 0px;
+    left: 0;
     justify-content: space-around;
+    @include blurNav();
+    z-index: 8;
 }
 .logo_nav {
     height: 60px;

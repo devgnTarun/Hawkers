@@ -12,11 +12,12 @@ const {
 } = require("../controller/vendorController");
 const router = express.Router();
 
+
 //User auth (normal user)
 router.post('/user/login', loginUser);
-router.post('/user/register', registerUser);
+router.post('/user/register',   registerUser);
 router.get('/users/:id/verify/:token', verifyToken); 
-router.get("/user/me", isAuthenticated, loadUser)
+router.get("/user/me", isAuthenticated,  loadUser)
 
 //Vendor user auth
 

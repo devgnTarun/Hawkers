@@ -1,7 +1,5 @@
 const express = require("express");
 const User = require("../models/userSchema");
-const nodemailer = require("nodemailer");
-const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
 const Token = require("../models/tokenSchema");
 const sendEmail = require("../utils/sendEmail");
@@ -13,8 +11,8 @@ exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-   const user = await User.findOne({ email }).select("+password");
-   
+    const user = await User.findOne({ email }).select("+password");
+
     if (!user) {
       return res.status(404).json({ message: "User not found on this email" });
     }
@@ -34,9 +32,8 @@ exports.loginUser = async (req, res) => {
           userId: user._id,
           token: crypto.randomBytes(32).toString("hex"),
         });
-        const url = `${req.protocol}://${req.get("host")}/users/${
-          user._id
-        }/verify/${token.token}`;
+        const url = `${req.protocol}://${req.get("host")}/users/${user._id
+          }/verify/${token.token}`;
         const options = {
           email: user.email,
           token: url,
@@ -61,9 +58,16 @@ exports.loginUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
- 
+
+
+    // const image = await cloudinary.v2.uploader.upload(req.body.image, {
+    //   folder: 'homie_shop',
+    //   width: 150,
+    //   crop: 'scale',
+    // })
+
     const preUser = await User.findOne({ email });
-    const preVendor = await Vendor.findOne({email})
+    const preVendor = await Vendor.findOne({ email })
 
     if (preUser || preVendor) {
       return res
@@ -74,17 +78,17 @@ exports.registerUser = async (req, res) => {
     const user = await User.create({
       name,
       email,
-      password
+      password,
+      // image : image.secure_url
     });
 
     const token = await Token.create({
       userId: user._id,
       token: crypto.randomBytes(32).toString("hex"),
     });
-   
-    const url = `${req.protocol}://${req.get("host")}/users/${
-      user._id
-    }/verify/${token.token}`;
+
+    const url = `${req.protocol}://${req.get("host")}/users/${user._id
+      }/verify/${token.token}`;
     const options = {
       email: user.email,
       token: url,
@@ -98,10 +102,11 @@ exports.registerUser = async (req, res) => {
         success: true,
         message: `Email verification has been sent on your email!! `,
       });
+      
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
+};   
 
 //Verify token
 

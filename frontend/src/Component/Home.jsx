@@ -1,12 +1,11 @@
 import React from 'react'
-import main from '../Images/main.jpg'
 
 const Home = () => {
   return (
     <div className="home_page">
         <div className="bg_img">
         </div>
-        <div className="main_content  shadow-lg">
+        <div draggable className="main_content  shadow-lg">
             <h1>Get the location of your nearby Vendors !</h1>
             <p>HawkerHub is a crowd-sourced, community-driven web application focused on enabling technology for street vendors and hawkers. This platform serves as a valuable tool for both vendors and customers, simplifying the ordering process and enhancing the overall customer experience .</p>
             <button className='rounded-xl'>Search Nearby Vendors</button>

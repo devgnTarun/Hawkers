@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const db_Uri =
   process.env.DB_URI ||
-  "mongodb+srv://chirag:chirag5656@cluster0.ayqitkb.mongodb.net/";
+  "mongodb+srv://devgan:devgan123@hawkers.njw2l0w.mongodb.net/?retryWrites=true&w=majority";
 
 const connectToMongo = () => {
   mongoose

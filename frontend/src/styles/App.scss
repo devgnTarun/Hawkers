@@ -2,6 +2,8 @@
 
 @import "_similar";
 @import 'header';
+@import 'main';
+@import 'login';
 
 * {
   margin: 0;
@@ -24,6 +26,10 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+.login_img {
+  background-image : url('../Images/market.jpg');
+  min-height: 100vh;
 }
 .main_content {
   width: 400px;
@@ -50,7 +56,6 @@
   }
   button {
     background-color: $yellow;
-    color: white;
     width: 100%;
     padding: 6px;
     font-size: 12px;
